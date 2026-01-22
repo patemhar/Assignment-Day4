@@ -23,11 +23,13 @@ export const router = createBrowserRouter([
           {
             path: "product/:id",
             element: <Product />,
-            loader: productDetailsLoader
-          },
-          {
-            path: "product/customize",
-            element: <Customise />,
+            loader: productDetailsLoader,
+            children: [
+              {
+                path: "customize",
+                element: <Customise />,
+              },
+            ]
           },
           {
             path: "cart",

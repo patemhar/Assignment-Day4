@@ -1,7 +1,8 @@
 import type { productInt } from '../constants/products'
 import clsx from 'clsx';
 import { addProduct } from '../store/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function renderStockMessage(stock:number) {
   if (stock < 1) return <p className='text-sm text-red-500'>Out Of Stock</p>;
@@ -12,6 +13,7 @@ function renderStockMessage(stock:number) {
 export default function Card({ id, images, title, description, price, stock, category }: productInt) {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return (
     <div className='max-w-md h-130 bg-white border rounded-lg mex-h-100 border-gray-200 shadow hover:shadow-lg transition-shadow duration-300'>
@@ -25,7 +27,7 @@ export default function Card({ id, images, title, description, price, stock, cat
             )}
         </div>
         <div className='p-4 h-79 relative flex flex-col flex-1'>
-            <h2 className='text-xl font-bold mb-2 line-clamp-1 text-cyan-900 dark:text-cyan-500'>
+            <h2 className='text-xl font-bold mb-2 line-clamp-1 text-cyan-900 dark:text-cyan-500 cursor-pointer' onClick={() => {navigate(`/shop/product/${id}`)}}>
                 {title}
             </h2>
             <p className='text-gray-600 mb-2 text-sm line-clamp-3'>

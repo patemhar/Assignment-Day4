@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    mode: 'light' 
+    mode: "light" 
 };
 
 export const themeSlice = createSlice({
@@ -10,6 +10,7 @@ export const themeSlice = createSlice({
     reducers: {
         toggleTheme: (state) => {
             state.mode = state.mode === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute("data-theme", state.mode)
         }
     }
 });

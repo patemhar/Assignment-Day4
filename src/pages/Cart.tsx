@@ -91,7 +91,7 @@ const Cart = () => {
               </button>
 
               {discountApplied && (
-                <p>"you saved <span className="font-semibold text-green-500">{discount.toFixed(2)}</span> was {ogPrice.toFixed(2)}!"</p>
+                <p>"You saved <span className="font-semibold text-green-500">{discount.toFixed(2)}</span> (was {ogPrice.toFixed(2)}!)"</p>
               )}
             </div>
           )}

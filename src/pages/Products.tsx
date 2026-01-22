@@ -1,7 +1,6 @@
 import Card from "../components/Card"
-import type { productInt } from "../constants/products"
 import { useCategories, useProducts } from "../hooks/product.hook"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 
 const Products = () => {
@@ -18,7 +17,7 @@ const Products = () => {
         value={searchTerm}
         placeholder="Search"
         type="text"
-        className="p-2 rounded-2xl border"
+        className="px-3 py-2 rounded-3xl border"
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
@@ -28,7 +27,7 @@ const Products = () => {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="mt-2 rounded-lg bg-white/80 p-1 max-h-100"
+            className="mt-2 ml-1 rounded-lg bg-white/80 p-1 max-h-100"
           >
             <option value="" >All</option>
             {categoryQuery?.data?.map((category) => {
@@ -58,7 +57,6 @@ const Products = () => {
             </div>
           )}
       </div>
-
     </div>    
   )
 }

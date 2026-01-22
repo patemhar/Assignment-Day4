@@ -7,6 +7,16 @@ class ApiClient {
     this.client = axios.create({
       baseURL,
     });
+    this.setUpInterceptor();
+  }
+
+  private setUpInterceptor(): void {
+    this.client.interceptors.request.use((config) => {
+      const token = "dummyToken"
+      config.headers = config.headers ?? {};
+      config.headers.Authorization = `Bearer ${token}`
+      return config;
+    })
   }
 
   async get<T>(url: string, params?: object): Promise<T> {

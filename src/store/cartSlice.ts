@@ -9,17 +9,21 @@ export type cartItems = {
     price: number
     stock: number
     category: string,
-    quantity: number
+    quantity: number,
+    customizations?: string
+}
+
+export type customizationData = {
+  id: number,
+  data: string
 }
 
 type CartState = {
     cartItems: cartItems[],
-    customData: any[]
 }
 
 const initialState: CartState = {
     cartItems: [],
-    customData: []
 }
 
 export const cartSlice = createSlice({
@@ -50,8 +54,22 @@ export const cartSlice = createSlice({
       state.cartItems = [];
     },
 
+    addCustomdata: (state, action: PayloadAction<customizationData>) => {
+      const existstingItem = state.cartItems.find(item => item.id === action.payload.id)
+      if(existstingItem) {
+        existstingItem.customizations = action.payload.data;
+      }
+    },
+
+    removeCustomdata: (state, action: PayloadAction<number>) => {
+      const existstingItem = state.cartItems.find(item => item.id === action.payload)
+      if(existstingItem) {
+        state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
+      }
+    }
+
   },
 });
 
-export const { addProduct, removeProduct, clearCart } = cartSlice.actions;
+export const { addProduct, removeProduct, clearCart, addCustomdata, removeCustomdata } = cartSlice.actions;
 export default cartSlice.reducer;

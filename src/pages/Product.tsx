@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom'
+import { Outlet, useLoaderData, useNavigate } from 'react-router-dom'
 import ApiClient from '../services/apiClient';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../store/cartSlice';
@@ -18,9 +18,10 @@ const Product = () => {
   const dispatch = useDispatch();
 
   const product = useLoaderData();
-  console.log(product);
+  const navigate = useNavigate();
+
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="relative max-w-3xl mx-auto p-6">
 
       <div className="flex gap-6">
         <img
@@ -65,12 +66,26 @@ const Product = () => {
         <p>Return Policy: {product.returnPolicy}</p>
       </div>
 
-      <button
-          onClick={() => dispatch(addProduct({...product}))} 
-          className='p-2 mt-4 rounded-lg border shadow-md transition-400 hover:shadow-lg'
-      >
-          Add to Cart
-      </button>
+      <div className='flex gap-2 mt-4'>
+          <button
+              onClick={() => dispatch(addProduct({...product}))} 
+              className='p-2 rounded-lg border shadow-md transition-400 hover:shadow-lg'
+          >
+              Add to Cart
+          </button>
+
+          <button
+            className='p-2 rounded-lg border shadow-md transition-400 hover:shadow-lg'
+            onClick={() => navigate("customize")}
+          >
+            Customise
+          </button>
+      </div>
+
+      <div className="fixed top-4/12 left-2/12 md:left-5/12">
+        <Outlet context={{ product }} />
+      </div>
+
     </div>
   )
 }
